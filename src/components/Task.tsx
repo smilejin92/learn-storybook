@@ -6,11 +6,15 @@ export interface TaskData {
 
 export interface TaskProps {
   task: TaskData;
+  onPinTask: (id: string) => void;
+  onArchiveTask: (id: string) => void;
 }
 
 export default function Task(props: TaskProps) {
   const {
     task: { id, title, state },
+    onArchiveTask,
+    onPinTask,
   } = props;
 
   return (
@@ -22,7 +26,7 @@ export default function Task(props: TaskProps) {
           disabled={true}
           name="checked"
         />
-        <span className="checkbox-custom" />
+        <span className="checkbox-custom" onClick={() => onArchiveTask(id)} />
       </label>
       <div className="title">
         <input
@@ -36,7 +40,7 @@ export default function Task(props: TaskProps) {
       <div className="actions" onClick={event => event.stopPropagation()}>
         {state !== 'TASK_ARCHIVED' && (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          <a>
+          <a onClick={() => onPinTask(id)}>
             <span className={`icon-star`} />
           </a>
         )}
