@@ -1,9 +1,11 @@
+export interface TaskData {
+  id: string;
+  title: string;
+  state: 'TASK_INBOX' | 'TASK_PINNED' | 'TASK_ARCHIVED';
+}
+
 export interface TaskProps {
-  task: {
-    id: string;
-    title: string;
-    state: 'TASK_INBOX' | 'TASK_PINNED' | 'TASK_ARCHIVED';
-  };
+  task: TaskData;
 }
 
 export default function Task(props: TaskProps) {
